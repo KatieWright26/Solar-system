@@ -2,11 +2,9 @@
 <script src="http://gamingJS.com/Three.js"></script> 
 <script src="http://gamingJS.com/ChromeFixes.js"></script> 
 <script>
-// This is where stuff in our game will happen:
 // Pluto, Merc, Mars, Neptune, Earth, Venus, Uranus, Saturn, Jupiter //
 
 var scene = new THREE.Scene()
-// This is what sees the stuff:
 
 var aspect_ratio = window.innerWidth / window.innerHeight
 var above_cam = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 1e6) 
@@ -17,13 +15,9 @@ var earth_cam = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 1e6)
 scene.add(earth_cam)
 var camera = above_cam
 
-// This will draw what the camera sees onto the screen:
-
 var renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
-
-// ******** START CODING ON THE NEXT LINE ********
 
 document.body.style.backgroundColor = 'black'
 
@@ -37,25 +31,26 @@ scene.add(ambient)
 var sunlight = new THREE.PointLight(0xffffff, 5, 1290) 
 sun.add(sunlight)
 
-function createPlanets(radius, color, position) {
+function createPlanets(radius, color, location) {
   var surface = new THREE.MeshPhongMaterial({ambient: 0x1a1a1a, color: color})
   var planet = new THREE.SphereGeometry(radius, 13, 15)
   var name = new THREE.Mesh(planet, surface)
   var orbit = new THREE.Object3D()
 
   orbit.add(name)
-  name.position.set(position, 0, 0)
+  name.position.set(location, 0, 0)
   sun.add(orbit)
 }
 
-function createMoons(radius, color, position) {
+function createMoons(radius, color, location) {
   var surface = new THREE.MeshPhongMaterial({ambient: 0x1a1a1a, color: color})
   var planet = new THREE.SphereGeometry(radius, 13, 15)
-  var name = new THREE.Mesh(planet, surface)
-  var orbit = new THREE.Object3D()
+  var moon = new THREE.Mesh(planet, surface)
+  var moonOrbit = new THREE.Object3D()
 
-  orbit.add(name)
-  name.position.set(0, position, 0)
+  moonOrbit.add(moon)
+  moon.position.set(0, location, 0)
+  mars.add(moonOrbit)
 }
 
 var mercury = createPlanets(10, 0x00ffff, 120)
@@ -139,49 +134,49 @@ function animate() {
   if(pause) return
   time = time + speed
 
-  var e_angle = time * 0.001
+  // var e_angle = time * 0.001
   // earth.position.set(320*Math.cos(e_angle), 250*Math.sin(e_angle), 0)
   
-  var m_angle = time * 0.008
-  moon.rotation.set(0, 0, m_angle) 
+  // var m_angle = time * 0.008
+  // moon.rotation.set(0, 0, m_angle) 
   
-  var d_angle = time * 0.004
-  deimosOrbit.rotation.set(0, 0, d_angle)
+  // var d_angle = time * 0.004
+  // deimosOrbit.rotation.set(0, 0, d_angle)
   var p_angle = time * 0.009
-  phobosOrbit.rotation.set(0, 0, p_angle)
+  phobos.rotation.set(0, 0, p_angle)
   
-  var io_angle = time * 0.009
-  ioOrbit.rotation.set(0, 0, io_angle)
-  var eur_angle = time * 0.006
-  europaOrbit.rotation.set(0, 0, eur_angle)
-  var call_angle = time * 0.005
-  callistoOrbit.rotation.set(0, 0, call_angle)
-  var gan_angle = time * 0.007
-  ganymedeOrbit.rotation.set(0, 0, gan_angle)
+  // var io_angle = time * 0.009
+  // ioOrbit.rotation.set(0, 0, io_angle)
+  // var eur_angle = time * 0.006
+  // europaOrbit.rotation.set(0, 0, eur_angle)
+  // var call_angle = time * 0.005
+  // callistoOrbit.rotation.set(0, 0, call_angle)
+  // var gan_angle = time * 0.007
+  // ganymedeOrbit.rotation.set(0, 0, gan_angle)
   
   // var merc_angle = time * 0.006
   // mercuryOrbit.rotation.set(0, 0, merc_angle)
   
-  var ven_angle = time * 0.003
-  venusOrbit.rotation.set(0, 0, ven_angle)
+  // var ven_angle = time * 0.003
+  // venusOrbit.rotation.set(0, 0, ven_angle)
   
-  var mars_angle = time * 0.0009
-  marsOrbit.rotation.set(0, 0, mars_angle)
+  // var mars_angle = time * 0.0009
+  // marsOrbit.rotation.set(0, 0, mars_angle)
   
-  var jup_angle = time * 0.0007
-  jupiterOrbit.rotation.set(0, 0, jup_angle)
+  // var jup_angle = time * 0.0007
+  // jupiterOrbit.rotation.set(0, 0, jup_angle)
   
-  var sat_angle = time * 0.00065
-  saturnOrbit.rotation.set(0, 0, sat_angle)
+  // var sat_angle = time * 0.00065
+  // saturnOrbit.rotation.set(0, 0, sat_angle)
   
-  var ur_angle = time * 0.00039
-  uranusOrbit.rotation.set(0, 0, ur_angle)
+  // var ur_angle = time * 0.00039
+  // uranusOrbit.rotation.set(0, 0, ur_angle)
   
-  var nep_angle = time * 0.00029
-  neptuneOrbit.rotation.set(0, 0, nep_angle)
+  // var nep_angle = time * 0.00029
+  // neptuneOrbit.rotation.set(0, 0, nep_angle)
   
-  var plu_angle = time * 0.00019
-  plutoOrbit.rotation.set(0, 0, plu_angle)
+  // var plu_angle = time * 0.00019
+  // plutoOrbit.rotation.set(0, 0, plu_angle)
   
 }
 animate() 
